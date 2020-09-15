@@ -1,0 +1,85 @@
+.counter_wrapper {
+    border: 5px solid #c6c6c6;
+    width: 400px;
+    height: 350px;
+    margin: 0 auto;
+    margin-top: 40px;
+    display: grid;
+    grid-template-rows: 1fr 0.5fr;
+    border-radius: 2%;
+}
+
+.display_wrapper {
+    display: grid;
+    margin: 15px;
+    justify-content: center;
+    align-items: center;
+    background: #313230;
+    border-radius: 2%;
+}
+
+.max_num {
+    background: red;
+}
+
+.button_wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.inc_button_wrapper {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.inc_button {
+    background: #e2e2e2;
+    border: none;
+    width: 100px;
+    height: 50px;
+    border-radius: 2%;
+    font-size: 20px;
+    transition: all 200ms;
+}
+
+.inc_button:hover {
+    cursor: pointer;
+    transition: all 200ms;
+    transform: scale(1.1)
+}
+
+.reset_button_wrapper {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset_button {
+    background: #e2e2e2;
+    width: 100px;
+    height: 50px;
+    border: none;
+    border-radius: 2%;
+    font-size: 20px;
+    transition: all 200ms;
+}
+
+.reset_button:hover {
+    cursor: pointer;
+    transition: all 200ms;
+    transform: scale(1.1)
+}
+
+.simple_number {
+    font-size: 35px;
+    font-weight: 500;
+    color: #f1efef;
+
+}
+
+.end_number {
+    color: #f1efef;
+    font-size: 70px;
+    font-weight: 600;
+}
