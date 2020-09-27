@@ -4,12 +4,11 @@ body
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
 
-    margin: 0;
-
     background: #2d2b2d;
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    padding-top: 150px;
 }
 
 code
@@ -22,9 +21,9 @@ code
 {
     width: 400px;
     height: auto;
-    margin: 0 auto;
-    margin-top: 150px;
+    margin: 15px;
     padding: 10px;
+    margin: 20px;
 
     border-radius: 5px;
     background: linear-gradient(281.42deg, rgba(137, 0, 201, .6545) -3.9%, rgba(228, 33, 33, .6314) 112.55%);
