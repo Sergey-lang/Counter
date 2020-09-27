@@ -1,0 +1,48 @@
+.counter_wrapper
+{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+
+    width: auto;
+    height: 130px;
+    margin: 0 auto;
+    margin-top: 20px;
+
+    border: 3px solid #2782a4;
+}
+
+.simple_number
+{
+    font-size: 35px;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+
+    text-align: center;
+
+    color: white;
+}
+
+.end_number
+{
+    font-size: 45px;
+
+    color: #cf1f1f;
+}
+
+.error
+{
+    font-size: 30px;
+
+    color: #cf1f1f;
+}
+
+.help_message
+{
+    font-size: 30px;
+}

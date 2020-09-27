@@ -1,0 +1,25 @@
+.button_wrapper
+{
+    display: flex;
+
+    margin: 10px;
+}
+
+.button
+{
+    font-size: 22px;
+
+    width: 80px;
+    height: 50px;
+
+    cursor: pointer;
+
+    color: #efeaea;
+    border: none;
+    outline: none;
+    background: #d03643;
+}
+
+.disabled {
+    opacity: 0.5;
+}

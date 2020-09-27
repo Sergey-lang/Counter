@@ -1,9 +1,4 @@
-.counter_wrapper {
-    background: darkslategray;
-    width: 400px;
-    height: 350px;
-    margin: 0 auto;
-    margin-top: 40px;
-    display: grid;
-    grid-template-rows: 1fr 0.5fr;
+.App {
+    display: flex;
+    flex-direction: row;
 }
