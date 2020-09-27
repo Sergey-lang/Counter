@@ -20,6 +20,7 @@ export const CounterSettings: React.FC<CounterPropsType> = (props) => {
         <div className={s.main_container}>
             <SettingsDisplay maxNum={props.maxNum}
                              minNum={props.minNum}
+                             helpMessage={props.helpMessage}
                              changeMaxValue={props.changeMaxValue}
                              changeMinValue={props.changeMinValue}
             />

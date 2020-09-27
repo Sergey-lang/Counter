@@ -4,11 +4,14 @@ import s from './SettingsDisplay.module.css'
 type DisplayPropsType = {
     maxNum: number
     minNum: number
+    helpMessage: string
     changeMaxValue: (value: number) => void
     changeMinValue: (value: number) => void
 }
 
 export const SettingsDisplay: React.FC<DisplayPropsType> = (props) => {
+
+    const inputErrorClass = props.helpMessage.includes('incorrect')
 
     const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => {
         props.changeMaxValue(Number(e.currentTarget.value))
@@ -23,6 +26,7 @@ export const SettingsDisplay: React.FC<DisplayPropsType> = (props) => {
                 <input type="number"
                        value={props.maxNum}
                        onChange={onChangeMaxHandler}
+                       className={inputErrorClass? `${s.error} ${s.input}`: s.input}
                 />
             </div>
             <div className={s.number}>
@@ -30,6 +34,7 @@ export const SettingsDisplay: React.FC<DisplayPropsType> = (props) => {
                 <input type="number"
                        value={props.minNum}
                        onChange={onChangeMinHandler}
+                       className={inputErrorClass? `${s.error} ${s.input}`: s.input}
                 />
             </div>
         </div>
