@@ -19,7 +19,7 @@ export function Display(props: DisplayPropsType) {
 
     return (
         <div className={s.counter_wrapper}>
-            {props.helpMessage.length != 0
+            {props.helpMessage.length !== 0
                 ? <p className={displayMessageClass}>{props.helpMessage}</p>
                 : <span className={spanClass}>
                     {props.currentValue}</span>

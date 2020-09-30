@@ -2,16 +2,26 @@ import React, {useState} from 'react';
 import './App.css';
 import {Counter} from './CounterTable/Counter';
 import {CounterSettings} from './CounterSettings/CounterSettings';
+import {restoreState, saveState} from './common/localStorage';
 
+type ValueType = {
+    min: number
+    max: number
+}
 
 function App() {
     let [currentValue, setCurrentValue] = useState<number>(0)
 
-    let [min, setMin] = useState<number>(0)
-    let [max, setMax] = useState<number>(5)
+    const state: ValueType = restoreState<ValueType>('value', {min: 0, max: 5});
+
+    let [min, setMin] = useState<number>(state.min)
+    let [max, setMax] = useState<number>(state.max)
 
     let [helpMessage, setHelpMessage] = useState<string>('')
 
+    function saveToStorage() {
+        saveState<ValueType>('value', {min: min, max: max});
+    };
 
     function increaseNumberCallback() {
         let plusValue = currentValue += 1
@@ -41,6 +51,7 @@ function App() {
     }
 
     function setValue() {
+        saveToStorage()
         setCurrentValue(min)
         setHelpMessage('')
     }
