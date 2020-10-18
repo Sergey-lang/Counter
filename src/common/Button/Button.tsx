@@ -4,15 +4,15 @@ import s from './Button.module.css'
 type ButtonPropsType = {
     callback: () => void
     title: string
-    toggle: boolean
+    disabled: boolean
 }
 
 export const Button: React.FC<ButtonPropsType> = (props: ButtonPropsType) => {
     return (
         <div className={s.button_wrapper}>
-            <button className={props.toggle ? `${s.disabled} ${s.button}` : s.button}
+            <button className={props.disabled ? `${s.disabled} ${s.button}` : s.button}
                     onClick={props.callback}
-                    disabled={props.toggle}>
+                    disabled={props.disabled}>
                 {props.title}
             </button>
         </div>

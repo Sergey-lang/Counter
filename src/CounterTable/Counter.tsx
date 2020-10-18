@@ -12,24 +12,21 @@ type CounterPropsType = {
     increaseNumberCallback: () => void
 }
 
-export const Counter: React.FC<CounterPropsType> = (props) => {
-
-    const minToggle = props.currentValue === props.minNum || props.helpMessage.length != 0
-    const maxToggle = props.currentValue >= props.maxNum || props.helpMessage.length != 0
+export const Counter: React.FC<CounterPropsType> = ({minNum, maxNum, helpMessage, currentValue, resetNumberCallback, increaseNumberCallback}) => {
 
     return (
         <div className={s.main_container}>
-            <Display currentValue={props.currentValue}
-                     helpMessage={props.helpMessage}
-                     maxNum={props.maxNum}
+            <Display currentValue={currentValue}
+                     helpMessage={helpMessage}
+                     maxNum={maxNum}
             />
             <div className={s.button_wrapper}>
-                <Button callback={props.increaseNumberCallback}
+                <Button callback={increaseNumberCallback}
                         title={'start'}
-                        toggle={maxToggle}/>
-                <Button callback={props.resetNumberCallback}
+                        disabled={helpMessage || currentValue === maxNum ? true : false}/>
+                <Button callback={resetNumberCallback}
                         title={'reset'}
-                        toggle={minToggle}/>
+                        disabled={helpMessage || currentValue === minNum ? true : false}/>
             </div>
         </div>
     )

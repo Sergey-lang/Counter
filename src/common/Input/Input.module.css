@@ -1,0 +1,54 @@
+.number label
+{
+    font-family: Roboto;
+    font-size: 1.5rem;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 42px;
+
+    display: flex;
+    justify-content: space-between;
+
+    margin: 0;
+
+    color: #ecdada;
+}
+
+.number
+{
+    font-size: 23px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: auto;
+    height: 40px;
+}
+
+.input
+{
+    font-family: Roboto;
+    font-size: 20px;
+
+    display: flex;
+    align-self: center;
+
+    width: 50%;
+    height: 25px;
+
+    transition: all 500ms;
+    text-align: center;
+
+    color: rgba(255, 255, 255, .75);
+    border: none;
+    outline: none;
+    background: rgba(227, 224, 224, .1);
+}
+
+.error
+{
+    transition: all 500ms;
+
+    background: rgba(255, 0, 0, .54);
+}

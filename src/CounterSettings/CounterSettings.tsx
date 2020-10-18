@@ -6,15 +6,13 @@ import {Button} from '../common/Button/Button';
 type CounterPropsType = {
     maxNum: number
     minNum: number
-    helpMessage: string
+    helpMessage: boolean
     setValue: () => void
     changeMaxValue: (value: number) => void
     changeMinValue: (value: number) => void
 }
 
 export const CounterSettings: React.FC<CounterPropsType> = (props) => {
-
-    const setToggle = props.helpMessage.includes('incorrect') || props.helpMessage.length === 0
 
     return (
         <div className={s.main_container}>
@@ -27,7 +25,7 @@ export const CounterSettings: React.FC<CounterPropsType> = (props) => {
             <div className={s.button_wrapper}>
                 <Button callback={props.setValue}
                         title={'set'}
-                        toggle={setToggle}
+                        disabled={props.helpMessage}
                 />
             </div>
         </div>

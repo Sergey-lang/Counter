@@ -3,26 +3,25 @@ import s from './Display.module.css'
 
 type DisplayPropsType = {
     maxNum: number
-    helpMessage: string
     currentValue: number
+    helpMessage: string
 }
 
-export function Display(props: DisplayPropsType) {
-
-    const displayMessageClass = props.helpMessage.includes('incorrect')
+export const Display: React.FC<DisplayPropsType> = ({maxNum, currentValue, helpMessage}) => {
+    const displayMessageClass = helpMessage.includes('incorrect')
         ? `${s.error} ${s.simple_number}`
         : `${s.help_message} ${s.simple_number}`
 
-    const spanClass = props.currentValue === props.maxNum
+    const spanClass = currentValue === maxNum
         ? `${s.end_number} ${s.simple_number}`
         : s.simple_number
 
     return (
         <div className={s.counter_wrapper}>
-            {props.helpMessage.length !== 0
-                ? <p className={displayMessageClass}>{props.helpMessage}</p>
+            {helpMessage.length !== 0
+                ? <p className={displayMessageClass}>{helpMessage}</p>
                 : <span className={spanClass}>
-                    {props.currentValue}</span>
+                    {currentValue}</span>
             }
         </div>
     )

@@ -10,12 +10,13 @@ type ValueType = {
 }
 
 function App() {
-    let [currentValue, setCurrentValue] = useState<number>(0)
 
     const state: ValueType = restoreState<ValueType>('value', {min: 0, max: 5});
 
     let [min, setMin] = useState<number>(state.min)
     let [max, setMax] = useState<number>(state.max)
+    let [currentValue, setCurrentValue] = useState<number>(min)
+
 
     let [helpMessage, setHelpMessage] = useState<string>('')
 
@@ -23,33 +24,32 @@ function App() {
         saveState<ValueType>('value', {min: min, max: max});
     };
 
-    function increaseNumberCallback() {
-        let plusValue = currentValue += 1
+    //Display
+    function increaseNumber() {
+        let plusValue = currentValue +1
         setCurrentValue(plusValue)
     }
-
-    function resetNumberCallback() {
+    function resetNumber() {
         setCurrentValue(min)
     }
 
-    function changeMaxValue(value: number) {
+    //Settings
+    function setMaxValue(value: number) {
         setMax(value)
-        if (value <= min) {
+        if (value <= min || min < 0) {
             setHelpMessage('incorrect value')
         } else {
             setHelpMessage(`enter values and press 'set'`)
         }
     }
-
-    function changeMinValue(value: number) {
+    function setMinValue(value: number) {
         setMin(value)
-        if (value < 0 || value > max || value === max) {
+        if (value < 0 || value >= max) {
             setHelpMessage('incorrect value')
         } else {
             setHelpMessage(`enter values and press 'set'`)
         }
     }
-
     function setValue() {
         saveToStorage()
         setCurrentValue(min)
@@ -60,17 +60,17 @@ function App() {
         <div className='App'>
             <CounterSettings minNum={min}
                              maxNum={max}
+                             helpMessage={helpMessage.includes('incorrect')}
                              setValue={setValue}
-                             helpMessage={helpMessage}
-                             changeMaxValue={changeMaxValue}
-                             changeMinValue={changeMinValue}
+                             changeMaxValue={setMaxValue}
+                             changeMinValue={setMinValue}
             />
             <Counter minNum={min}
                      maxNum={max}
                      helpMessage={helpMessage}
                      currentValue={currentValue}
-                     resetNumberCallback={resetNumberCallback}
-                     increaseNumberCallback={increaseNumberCallback}
+                     resetNumberCallback={resetNumber}
+                     increaseNumberCallback={increaseNumber}
             />
         </div>
     )

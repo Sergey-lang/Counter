@@ -1,42 +1,29 @@
-import React, {ChangeEvent, useState} from 'react';
+import React from 'react';
 import s from './SettingsDisplay.module.css'
+import {Input} from '../../common/Input/Input';
 
-type DisplayPropsType = {
+type SettingsDisplayPropsType = {
     maxNum: number
     minNum: number
-    helpMessage: string
+    helpMessage: boolean
     changeMaxValue: (value: number) => void
     changeMinValue: (value: number) => void
 }
 
-export const SettingsDisplay: React.FC<DisplayPropsType> = (props) => {
+export const SettingsDisplay: React.FC<SettingsDisplayPropsType> = ({maxNum, minNum,helpMessage, changeMaxValue, changeMinValue}) => {
 
-    const inputErrorClass = props.helpMessage.includes('incorrect')
-
-    const onChangeMaxHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.changeMaxValue(Number(e.currentTarget.value))
-    }
-    const onChangeMinHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.changeMinValue(Number(e.currentTarget.value))
-    }
     return (
         <div className={s.counter_wrapper}>
-            <div className={s.number}>
-                <h4>max value:</h4>
-                <input type="number"
-                       value={props.maxNum}
-                       onChange={onChangeMaxHandler}
-                       className={inputErrorClass? `${s.error} ${s.input}`: s.input}
-                />
-            </div>
-            <div className={s.number}>
-                <h4>min value:</h4>
-                <input type="number"
-                       value={props.minNum}
-                       onChange={onChangeMinHandler}
-                       className={inputErrorClass? `${s.error} ${s.input}`: s.input}
-                />
-            </div>
+            <Input value={maxNum}
+                   callback={changeMaxValue}
+                   className={helpMessage}
+                   label={'max value:'}
+            />
+            <Input value={minNum}
+                   callback={changeMinValue}
+                   className={helpMessage}
+                   label={'min value:'}
+            />
         </div>
     )
 }
