@@ -11,11 +11,11 @@ import {
     SetValueAC
 } from '../Redux/actions';
 import {connect} from 'react-redux';
-import {CounterInitType} from '../Redux/counter-reducer';
+import {CounterInitStateType} from '../Redux/counter-reducer';
 
 
-interface ICounterProps extends CounterInitType {
-    setValue: (minValue: number, helpMessage: string) => void;
+interface ICounterProps extends CounterInitStateType {
+    setValue: () => void;
     setMaxValue: (inputValue: number) => void;
     setMinValue: (inputValue: number) => void;
 }
@@ -50,8 +50,8 @@ const mapStateToProps = (state: IGlobalState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<CounterReducersTypes>) => {
     return {
-        setValue(minValue: number, helpMessage: string) {
-            dispatch(SetValueAC(minValue, helpMessage));
+        setValue() {
+            dispatch(SetValueAC());
         },
         setMaxValue(inputValue: number) {
             dispatch(SetMaxValueAC(inputValue));

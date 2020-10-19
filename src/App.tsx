@@ -30,7 +30,7 @@ export const App: React.FC = () => {
     // }
     // function resetNumber() {
     //     setCurrentValue(min)
-    // }
+    // } //completed
     //
     //
     // function setMaxValue(value: number) {

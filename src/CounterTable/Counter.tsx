@@ -6,9 +6,9 @@ import {connect} from 'react-redux';
 import {IGlobalState} from '../Redux/state';
 import {compose, Dispatch} from 'redux';
 import {CounterReducersTypes, IncreaseNumberAC, ResetNumberAC,} from '../Redux/actions';
-import {CounterInitType} from '../Redux/counter-reducer';
+import {CounterInitStateType} from '../Redux/counter-reducer';
 
-interface ICounterProps extends CounterInitType {
+interface ICounterProps extends CounterInitStateType {
     increaseNumber: () => void;
     resetNumber: () => void;
 }

@@ -1,7 +1,8 @@
 export enum ACTIONS_TYPE {
-    SET_VALUE = 'Counter/SET_VALUE',
     INCREASE_NUMBER = 'Counter/INCREASE_NUMBER',
     RESET_NUMBER = 'Counter/RESET_NUMBER',
+
+    SET_VALUE = 'Counter/SET_VALUE',
     SET_MAX_VALUE = 'Counter/SET_MAX_VALUE',
     SET_MIN_VALUE = 'Counter/SET_MIN_VALUE',
 }
@@ -34,18 +35,10 @@ export const ResetNumberAC = (): ResetNumber => {
 //CounterSettings
 export type SetValue = {
     type: ACTIONS_TYPE.SET_VALUE
-    payload: {
-        minValue: number
-        helpMessage: string
-    }
 }
-export const SetValueAC = (minValue: number, helpMessage: string): SetValue => {
+export const SetValueAC = (): SetValue => {
     return {
         type: ACTIONS_TYPE.SET_VALUE,
-        payload: {
-            minValue,
-            helpMessage,
-        },
     };
 };
 
