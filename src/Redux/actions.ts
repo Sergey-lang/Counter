@@ -31,7 +31,6 @@ export const ResetNumberAC = (): ResetNumber => {
 };
 
 
-
 //CounterSettings
 export type SetValue = {
     type: ACTIONS_TYPE.SET_VALUE
@@ -64,6 +63,21 @@ export type SetMinValue = {
     }
 }
 export const SetMinValueAC = (inputValue: number): SetMinValue => {
+    return {
+        type: ACTIONS_TYPE.SET_MIN_VALUE,
+        payload: {
+            inputValue,
+        },
+    };
+};
+
+export type SaveSetValueToStorage = {
+    type: ACTIONS_TYPE.SET_MIN_VALUE
+    payload: {
+        inputValue: number
+    }
+}
+export const SaveSetValueToStorageAC = (inputValue: number): SetMinValue => {
     return {
         type: ACTIONS_TYPE.SET_MIN_VALUE,
         payload: {

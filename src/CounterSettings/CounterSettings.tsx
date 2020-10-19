@@ -3,24 +3,13 @@ import {SettingsDisplay} from './Display/SettingsDisplay';
 import s from './CounterSettings.module.css'
 import {Button} from '../common/Button/Button';
 import {IGlobalState} from '../Redux/state';
-import {compose, Dispatch} from 'redux';
-import {
-    CounterReducersTypes,
-    SetMaxValueAC,
-    SetMinValueAC,
-    SetValueAC
-} from '../Redux/actions';
+import {Dispatch} from 'redux';
+import {CounterReducersTypes, SetMaxValueAC, SetMinValueAC, SetValueAC} from '../Redux/actions';
 import {connect} from 'react-redux';
-import {CounterInitStateType} from '../Redux/counter-reducer';
 
 
-interface ICounterProps extends CounterInitStateType {
-    setValue: () => void;
-    setMaxValue: (inputValue: number) => void;
-    setMinValue: (inputValue: number) => void;
-}
-
-export const CounterSettings: React.FC<ICounterProps> = ({setValue, setMaxValue, setMinValue, minValue, maxValue, helpMessage}) => {
+type PropsType = MapDispatchType & MapStateType
+export const CounterSettings: React.FC<PropsType> = ({setValue, setMaxValue, setMinValue, minValue, maxValue, helpMessage}) => {
 
     return (
         <div className={s.main_container}>
@@ -31,16 +20,28 @@ export const CounterSettings: React.FC<ICounterProps> = ({setValue, setMaxValue,
                              changeMinValue={setMinValue}
             />
             <div className={s.button_wrapper}>
-                <Button callback={() => setValue} //error
+                <Button callback={setValue}
                         title={'set'}
-                        disabled={helpMessage.length != 0}
+                        disabled={helpMessage.length === 0}
                 />
             </div>
         </div>
     )
 }
 
-const mapStateToProps = (state: IGlobalState) => {
+type MapStateType = {
+    minValue: number
+    maxValue: number,
+    helpMessage: string,
+}
+
+type MapDispatchType = {
+    setValue: () => void
+    setMaxValue: (inputValue: number) => void
+    setMinValue: (inputValue: number) => void
+}
+
+const mapStateToProps = (state: IGlobalState): MapStateType => {
     return {
         minValue: state.counter.minValue,
         maxValue: state.counter.maxValue,
@@ -48,7 +49,7 @@ const mapStateToProps = (state: IGlobalState) => {
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<CounterReducersTypes>) => {
+const mapDispatchToProps = (dispatch: Dispatch<CounterReducersTypes>): MapDispatchType => {
     return {
         setValue() {
             dispatch(SetValueAC());
@@ -62,5 +63,5 @@ const mapDispatchToProps = (dispatch: Dispatch<CounterReducersTypes>) => {
     };
 };
 
-export const CounterSettingContainer = compose(connect(mapStateToProps, mapDispatchToProps)(CounterSettings));
+export const CounterSettingContainer = connect<MapStateType, MapDispatchType, {}, IGlobalState>(mapStateToProps, mapDispatchToProps)(CounterSettings);
 

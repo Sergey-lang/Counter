@@ -4,16 +4,12 @@ import {Button} from '../common/Button/Button';
 import s from './Counter.module.css'
 import {connect} from 'react-redux';
 import {IGlobalState} from '../Redux/state';
-import {compose, Dispatch} from 'redux';
+import {Dispatch} from 'redux';
 import {CounterReducersTypes, IncreaseNumberAC, ResetNumberAC,} from '../Redux/actions';
-import {CounterInitStateType} from '../Redux/counter-reducer';
 
-interface ICounterProps extends CounterInitStateType {
-    increaseNumber: () => void;
-    resetNumber: () => void;
-}
 
-export const Counter: React.FC<ICounterProps> = ({minValue, maxValue, helpMessage, currentValue, resetNumber, increaseNumber}) => {
+type PropsType = MapStateType & MapDispatchType
+export const Counter: React.FC<PropsType> = ({minValue, maxValue, helpMessage, currentValue, resetNumber, increaseNumber}) => {
 
     return (
         <div className={s.main_container}>
@@ -22,10 +18,10 @@ export const Counter: React.FC<ICounterProps> = ({minValue, maxValue, helpMessag
                      maxNum={maxValue}
             />
             <div className={s.button_wrapper}>
-                <Button callback={() => increaseNumber}
+                <Button callback={increaseNumber}
                         title={'start'}
                         disabled={helpMessage || currentValue === maxValue ? true : false}/>
-                <Button callback={() => resetNumber}
+                <Button callback={resetNumber}
                         title={'reset'}
                         disabled={helpMessage || currentValue === minValue ? true : false}/>
             </div>
@@ -33,16 +29,28 @@ export const Counter: React.FC<ICounterProps> = ({minValue, maxValue, helpMessag
     )
 }
 
+type MapStateType = {
+    minValue: number
+    maxValue: number
+    helpMessage: string
+    currentValue: number
+}
 
-const mapStateToProps = (state: IGlobalState) => {
+type MapDispatchType = {
+    increaseNumber: () => void
+    resetNumber: () => void
+}
+
+const mapStateToProps = (state: IGlobalState): MapStateType => {
     return {
         minValue: state.counter.minValue,
         maxValue: state.counter.maxValue,
         helpMessage: state.counter.helpMessage,
+        currentValue: state.counter.currentValue
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<CounterReducersTypes>) => {
+const mapDispatchToProps = (dispatch: Dispatch<CounterReducersTypes>):MapDispatchType => {
     return {
         increaseNumber() {
             dispatch(IncreaseNumberAC());
@@ -53,6 +61,6 @@ const mapDispatchToProps = (dispatch: Dispatch<CounterReducersTypes>) => {
     };
 };
 
-export const CounterContainer = compose(connect(mapStateToProps, mapDispatchToProps)(Counter));
+export const CounterContainer = connect<MapStateType, MapDispatchType, {}, IGlobalState>(mapStateToProps, mapDispatchToProps)(Counter);
 
 
