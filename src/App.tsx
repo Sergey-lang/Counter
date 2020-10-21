@@ -1,16 +1,19 @@
 import React from 'react';
 import './App.css';
-import {CounterContainer} from './CounterTable/Counter';
-import {CounterSettingContainer} from './CounterSettings/CounterSettings';
-
-type ValueType = {
-    min: number
-    max: number
-}
+import { CounterDisplay } from './CounterTable/CounterDispaly';
+import { CounterSettings } from './CounterSettings/CounterSettings';
 
 export const App: React.FC = () => {
 
-    // const state: ValueType = restoreState<ValueType>('value', {min: 0, max: 5});
+    return (
+        <div className='App'>
+            <CounterSettings />
+            <CounterDisplay />
+        </div>
+    )
+}
+
+// const state: ValueType = restoreState<ValueType>('value', {min: 0, max: 5});
     //
     // let [min, setMin] = useState<number>(state.min)
     // let [max, setMax] = useState<number>(state.max)
@@ -54,11 +57,3 @@ export const App: React.FC = () => {
     //     setCurrentValue(min)
     //     setHelpMessage('')
     // }
-
-    return (
-        <div className='App'>
-            <CounterSettingContainer/>
-            <CounterContainer/>
-        </div>
-    )
-}

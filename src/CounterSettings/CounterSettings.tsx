@@ -1,67 +1,64 @@
 import React from 'react';
-import {SettingsDisplay} from './Display/SettingsDisplay';
+import { SettingsDisplay } from './Display/SettingsDisplay';
 import s from './CounterSettings.module.css'
-import {Button} from '../common/Button/Button';
-import {IGlobalState} from '../Redux/state';
-import {Dispatch} from 'redux';
-import {CounterReducersTypes, SetMaxValueAC, SetMinValueAC, SetValueAC} from '../Redux/actions';
-import {connect} from 'react-redux';
+import { Button } from '../common/Button/Button';
+import { rootState } from '../Redux/state';
+import { useDispatch, useSelector } from 'react-redux';
+import { CounterInitStateType } from '../Redux/counter-reducer'
+import { SetMaxValueAC, SetMinValueAC, SetValueAC } from '../Redux/actions';
 
+export const CounterSettings: React.FC = () => {
 
-type PropsType = MapDispatchType & MapStateType
-export const CounterSettings: React.FC<PropsType> = ({setValue, setMaxValue, setMinValue, minValue, maxValue, helpMessage}) => {
+    const dispatch = useDispatch()
+
+    const counter = useSelector<rootState, CounterInitStateType>(state => state.counter)
+
+    let setValue = () => dispatch(SetValueAC());
+    let setMaxValue = (inputValue: number) => dispatch(SetMaxValueAC(inputValue))
+    let setMinValue = (inputValue: number) => dispatch(SetMinValueAC(inputValue));
+
+    // {
+    //     type StateType = {
+    //         min: number
+    //         max: number
+    //     }
+
+    //     let state: StateType = {
+    //         min: counter.minValue,
+    //         max: counter.maxValue
+    //     }
+
+    //     function saveState<T>(key: string, state: T) {
+    //         const stateAsString = JSON.stringify(state);
+    //         localStorage.setItem(key, stateAsString)
+    //     }
+    //     saveState<StateType>("start value", { min: 5, max: 0 });
+
+    //     function restoreState<T>(key: string, defaultState: T) {
+    //         const stateAsString = localStorage.getItem(key);
+    //         if (stateAsString !== null) defaultState = JSON.parse(stateAsString) as T;
+    //         return defaultState;
+    //     }
+    //     const minMaxValue = restoreState("start value", { x: 5, y: 0 });
+    // }
 
     return (
         <div className={s.main_container}>
-            <SettingsDisplay maxNum={maxValue}
-                             minNum={minValue}
-                             helpMessage={helpMessage.includes('incorrect')}
-                             changeMaxValue={setMaxValue}
-                             changeMinValue={setMinValue}
+            <SettingsDisplay maxNum={counter.maxValue}
+                minNum={counter.minValue}
+                helpMessage={counter.helpMessage.includes('incorrect')}
+                changeMaxValue={setMaxValue}
+                changeMinValue={setMinValue}
             />
             <div className={s.button_wrapper}>
                 <Button callback={setValue}
-                        title={'set'}
-                        disabled={helpMessage.length === 0}
+                    title={'set'}
+                    disabled={counter.helpMessage.length === 0
+                        || counter.helpMessage.includes('incorrect')}
                 />
             </div>
         </div>
     )
 }
 
-type MapStateType = {
-    minValue: number
-    maxValue: number,
-    helpMessage: string,
-}
-
-type MapDispatchType = {
-    setValue: () => void
-    setMaxValue: (inputValue: number) => void
-    setMinValue: (inputValue: number) => void
-}
-
-const mapStateToProps = (state: IGlobalState): MapStateType => {
-    return {
-        minValue: state.counter.minValue,
-        maxValue: state.counter.maxValue,
-        helpMessage: state.counter.helpMessage,
-    };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<CounterReducersTypes>): MapDispatchType => {
-    return {
-        setValue() {
-            dispatch(SetValueAC());
-        },
-        setMaxValue(inputValue: number) {
-            dispatch(SetMaxValueAC(inputValue));
-        },
-        setMinValue(inputValue: number) {
-            dispatch(SetMinValueAC(inputValue));
-        },
-    };
-};
-
-export const CounterSettingContainer = connect<MapStateType, MapDispatchType, {}, IGlobalState>(mapStateToProps, mapDispatchToProps)(CounterSettings);
 
