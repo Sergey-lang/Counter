@@ -1,4 +1,4 @@
-import { ACTIONS_TYPE, CounterReducersTypes } from './actions';
+import {ACTIONS_TYPE, CounterReducersTypes} from './actions';
 
 export type CounterInitStateType = {
     minValue: number
@@ -23,15 +23,16 @@ export const counterReducer = (state: CounterInitStateType = initialState, actio
     switch (action.type) {
         //CounterDisplay
         case ACTIONS_TYPE.RESET_NUMBER: {
-            return { ...state, currentValue: state.minValue }
+            return {...state, currentValue: state.minValue}
         }
         case ACTIONS_TYPE.INCREASE_NUMBER: {
-            return { ...state, currentValue: state.currentValue + 1 }
+            return {...state, currentValue: state.currentValue + 1}
         }
         //CounterSettings
         case ACTIONS_TYPE.SET_MAX_VALUE: {
-            let copyState = { ...state }
-            let max = action.payload.inputValue 
+
+            let copyState = {...state}
+            let max = action.payload.inputValue
             if (max <= copyState.minValue || copyState.minValue < 0) {
                 copyState.helpMessage = 'incorrect value'
                 copyState.maxValue = max
@@ -42,8 +43,8 @@ export const counterReducer = (state: CounterInitStateType = initialState, actio
             return copyState
         }
         case ACTIONS_TYPE.SET_MIN_VALUE: {
-            let copyState = { ...state } 
-            let min = action.payload.inputValue 
+            let copyState = {...state}
+            let min = action.payload.inputValue
             if (min >= copyState.maxValue || min < 0) {
                 copyState.helpMessage = 'incorrect value'
                 copyState.minValue = min
@@ -60,7 +61,16 @@ export const counterReducer = (state: CounterInitStateType = initialState, actio
                 helpMessage: state.helpMessage = ''
             }
         }
-        default:
-            return state;
+        default: {
+
+            let restoreState = <T>(key: string, defaultState: T) => {
+                const stateAsString = localStorage.getItem(key);
+                if (stateAsString !== null) defaultState = JSON.parse(stateAsString) as T;
+                return defaultState;
+            }
+
+            const save = restoreState('start value', {min: state.minValue, max: state.maxValue});
+            return {...state, maxValue: save.max, minValue: save.min, currentValue: save.min};
+        }
     }
 };
