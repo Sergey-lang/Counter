@@ -1,12 +1,10 @@
-.button_wrapper
-{
+.button_wrapper {
     display: flex;
 
     margin: 10px;
 }
 
-.button
-{
+.button {
     font-size: 22px;
 
     width: 80px;

@@ -1,9 +1,7 @@
-.main_container
-{
+.main_container {
     composes: counter_wrapper from './../index.css';
 }
 
-.button_wrapper
-{
+.button_wrapper {
     composes: btn_counter_wrapper from './../index.css';
 }

@@ -1,5 +1,4 @@
-.number label
-{
+.number label {
     font-family: Roboto;
     font-size: 1.5rem;
     font-weight: normal;
@@ -14,8 +13,7 @@
     color: #ecdada;
 }
 
-.number
-{
+.number {
     font-size: 23px;
 
     display: flex;
@@ -26,8 +24,7 @@
     height: 40px;
 }
 
-.input
-{
+.input {
     font-family: Roboto;
     font-size: 20px;
 
@@ -46,8 +43,7 @@
     background: rgba(227, 224, 224, .1);
 }
 
-.error
-{
+.error {
     transition: all 500ms;
 
     background: rgba(255, 0, 0, .54);

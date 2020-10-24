@@ -1,5 +1,4 @@
-.counter_wrapper
-{
+.counter_wrapper {
     display: flex;
     align-items: center;
     flex-direction: column;

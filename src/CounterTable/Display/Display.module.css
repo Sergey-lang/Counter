@@ -1,5 +1,4 @@
-.counter_wrapper
-{
+.counter_wrapper {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -15,8 +14,7 @@
     box-shadow: inset 0 2px 2px 2px rgba(0, 0, 0, .25);
 }
 
-.simple_number
-{
+.simple_number {
     font-family: Roboto;
     font-size: 100px;
     font-weight: normal;
@@ -34,21 +32,18 @@
     text-shadow: 0 4px 4px rgba(0, 0, 0, .25);
 }
 
-.end_number
-{
+.end_number {
     font-size: 145px;
 
     color: #2AC7EA;
 }
 
-.error
-{
+.error {
     font-size: 30px;
 
     color: #cf1f1f;
 }
 
-.help_message
-{
+.help_message {
     font-size: 30px;
 }
