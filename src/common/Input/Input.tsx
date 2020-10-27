@@ -8,7 +8,8 @@ type InputPropsType = {
   label: string
 }
 
-export const Input: React.FC<InputPropsType> = ({value, callback, className, label}) => {
+const InputComponent: React.FC<InputPropsType> = ({value, callback, className, label}) => {
+  console.log('Input Component rerender')
   return (
     <div className={s.number}>
       <label>{label}
@@ -21,3 +22,5 @@ export const Input: React.FC<InputPropsType> = ({value, callback, className, lab
     </div>
   )
 }
+
+export const Input = React.memo(InputComponent)

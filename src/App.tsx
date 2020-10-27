@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {CounterDisplay} from './CounterTable/CounterDispaly';
+import {CounterDisplay} from './CounterTable/CounterDisplay';
 import {CounterSettings} from './CounterSettings/CounterSettings';
 
 export const App: React.FC = () => {

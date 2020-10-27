@@ -10,7 +10,7 @@ type SettingsDisplayPropsType = {
     changeMinValue: (value: number) => void
 }
 
-export const SettingsDisplay: React.FC<SettingsDisplayPropsType> = ({maxNum, minNum,helpMessage, changeMaxValue, changeMinValue}) => {
+const SettingsDisplayComponent: React.FC<SettingsDisplayPropsType> = ({maxNum, minNum,helpMessage, changeMaxValue, changeMinValue}) => {
 
     return (
         <div className={s.counter_wrapper}>
@@ -27,3 +27,5 @@ export const SettingsDisplay: React.FC<SettingsDisplayPropsType> = ({maxNum, min
         </div>
     )
 }
+
+export const SettingsDisplay = React.memo(SettingsDisplayComponent)

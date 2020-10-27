@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {SettingsDisplay} from './Display/SettingsDisplay';
 import s from './CounterSettings.module.css'
 import {Button} from '../common/Button/Button';
@@ -7,7 +7,9 @@ import {useSelector} from 'react-redux';
 import {InitialStateType} from '../Redux/counter-reducer'
 import {SetMaxValueAC, SetMinValueAC, SetValueAC, useDispatch} from '../Redux/actions';
 
-export const CounterSettings: React.FC = () => {
+
+export const CounterSettings = React.memo(() => {
+  console.log('Counter Configurations rerender')
 
   const dispatch = useDispatch()
 
@@ -31,9 +33,9 @@ export const CounterSettings: React.FC = () => {
     saveState<StateType>('start value', {min: state.min, max: state.max})
   }, [counter.minValue, counter.maxValue])
 
-  let setValue = () => dispatch(SetValueAC());
-  let setMaxValue = (inputValue: number) => dispatch(SetMaxValueAC(inputValue))
-  let setMinValue = (inputValue: number) => dispatch(SetMinValueAC(inputValue));
+  let setValue = useCallback(() => dispatch(SetValueAC()), [dispatch]);
+  let setMaxValue = useCallback((inputValue: number) => dispatch(SetMaxValueAC(inputValue)), [dispatch]);
+  let setMinValue = useCallback((inputValue: number) => dispatch(SetMinValueAC(inputValue)), [dispatch]);
 
   return (
     <div className={s.main_container}>
@@ -52,6 +54,7 @@ export const CounterSettings: React.FC = () => {
       </div>
     </div>
   )
-}
+})
+
 
 

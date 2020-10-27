@@ -7,7 +7,8 @@ type ButtonPropsType = {
   disabled: boolean
 }
 
-export const Button: React.FC<ButtonPropsType> = (props: ButtonPropsType) => {
+export const ButtonComponent: React.FC<ButtonPropsType> = (props: ButtonPropsType) => {
+  console.log('Button Component rerender')
   return (
     <div className={s.button_wrapper}>
       <button className={props.disabled ? `${s.disabled} ${s.button}` : s.button}
@@ -18,3 +19,6 @@ export const Button: React.FC<ButtonPropsType> = (props: ButtonPropsType) => {
     </div>
   )
 }
+
+export const Button = React.memo(ButtonComponent)
+
