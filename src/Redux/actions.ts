@@ -1,93 +1,18 @@
 import {useDispatch as _useDispatch} from 'react-redux';
+import {InferActionsTypes} from './store';
 
-export enum ACTIONS_TYPE {
-  INCREASE_NUMBER = 'Counter/INCREASE_NUMBER',
-  RESET_NUMBER = 'Counter/RESET_NUMBER',
+export type ActionsTypes = InferActionsTypes<typeof actions>
 
-  SET_VALUE = 'Counter/SET_VALUE',
-  SET_MAX_VALUE = 'Counter/SET_MAX_VALUE',
-  SET_MIN_VALUE = 'Counter/SET_MIN_VALUE',
+export const actions = {
+   IncreaseNumberAC: () => ({type: 'COUNTER/INCREASE_NUMBER'} as const),
+   ResetNumberAC: () => ({type: 'COUNTER/RESET_NUMBER'} as const),
+   SetValueAC: () => ({type: 'COUNTER/SET_VALUE'} as const),
+   SetMaxValueAC: (inputValue: number) => ({type: 'COUNTER/SET_MAX_VALUE', inputValue} as const),
+   SetMinValueAC: (inputValue: number) => ({type: 'COUNTER/SET_MIN_VALUE', inputValue} as const),
+   SaveSetValueToStorageAC: (inputValue: number) => ({type: 'COUNTER/SET_MIN_VALUE', inputValue} as const)
 }
 
-export type CounterReducersTypes = SetValue | IncreaseNumber | ResetNumber |
-  SetMaxValue | SetMinValue
-
-//CounterDisplay
-export type IncreaseNumber = {
-  type: ACTIONS_TYPE.INCREASE_NUMBER
-}
-export const IncreaseNumberAC = (): IncreaseNumber => {
-  return {
-    type: ACTIONS_TYPE.INCREASE_NUMBER,
-  };
-};
-
-export type ResetNumber = {
-  type: ACTIONS_TYPE.RESET_NUMBER
-}
-export const ResetNumberAC = (): ResetNumber => {
-  return {
-    type: ACTIONS_TYPE.RESET_NUMBER,
-  };
-};
-
-//CounterSettings
-export type SetValue = {
-  type: ACTIONS_TYPE.SET_VALUE
-}
-export const SetValueAC = (): SetValue => {
-  return {
-    type: ACTIONS_TYPE.SET_VALUE,
-  };
-};
-
-export type SetMaxValue = {
-  type: ACTIONS_TYPE.SET_MAX_VALUE
-  payload: {
-    inputValue: number
-  }
-}
-export const SetMaxValueAC = (inputValue: number): SetMaxValue => {
-  return {
-    type: ACTIONS_TYPE.SET_MAX_VALUE,
-    payload: {
-      inputValue,
-    },
-  };
-};
-
-export type SetMinValue = {
-  type: ACTIONS_TYPE.SET_MIN_VALUE
-  payload: {
-    inputValue: number
-  }
-}
-export const SetMinValueAC = (inputValue: number): SetMinValue => {
-  return {
-    type: ACTIONS_TYPE.SET_MIN_VALUE,
-    payload: {
-      inputValue,
-    },
-  };
-};
-
-export type SaveSetValueToStorage = {
-  type: ACTIONS_TYPE.SET_MIN_VALUE
-  payload: {
-    inputValue: number
-  }
-}
-export const SaveSetValueToStorageAC = (inputValue: number): SetMinValue => {
-  return {
-    type: ACTIONS_TYPE.SET_MIN_VALUE,
-    payload: {
-      inputValue,
-    },
-  };
-};
-
-//типизация dispatch, принимает ActionsType
 export function useDispatch() {
-  const dispatch = _useDispatch();
-  return (ac: CounterReducersTypes) => dispatch(ac)
+   const dispatch = _useDispatch();
+   return (ac: ActionsTypes) => dispatch(ac)
 }
